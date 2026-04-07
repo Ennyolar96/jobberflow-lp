@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function CTASection() {
@@ -38,14 +38,20 @@ export default function CTASection() {
                 Download Now
               </a>
             </Button>
-            {/* <Button
+            <Button
               variant="outline"
               size="lg"
               className="rounded-full px-8 h-14 text-base font-inter gap-2 hover:bg-primary/10 transition-colors"
+              asChild
             >
-              Follow Onboarding Guide
-              <ArrowRight className="h-4 w-4" />
-            </Button> */}
+              <a
+                href="https://www.propactly.com/shared/brd/eca838e6-8abc-4ca6-a8a8-b11df1025d8a?permission=public"
+                target="_blank"
+              >
+                Check Out PRD
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
           </div>
         </motion.div>
       </div>
