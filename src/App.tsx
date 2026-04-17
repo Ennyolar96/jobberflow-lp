@@ -1,4 +1,5 @@
 import ApiSetupSection from "./components/landing/apiSetupSection";
+import AppScreens from "./components/landing/appScreens";
 import CTASection from "./components/landing/ctaSection";
 import FAQSection from "./components/landing/faqSection";
 import FeaturesSection from "./components/landing/featuresSection";
@@ -14,6 +15,7 @@ export default function Landing() {
     <div className="min-h-screen font-inter bg-background text-foreground antialiased">
       <Navbar />
       <HeroSection />
+      <AppScreens />
       <FeaturesSection />
       <HowItWorksSection />
       <ApiSetupSection />
