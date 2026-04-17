@@ -16,7 +16,12 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-function PhoneFrame({ children, className = "" }) {
+interface PhoneFrameProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function PhoneFrame({ children, className = "" }: PhoneFrameProps) {
   return (
     <div
       className={`relative w-[260px] rounded-[42px] border-[8px] border-slate-900 bg-black shadow-2xl overflow-hidden ${className}`}
@@ -32,7 +37,11 @@ function PhoneFrame({ children, className = "" }) {
   );
 }
 
-function BottomNav({ activeTab }) {
+interface BottomNavProps {
+  activeTab: string;
+}
+
+function BottomNav({ activeTab }: BottomNavProps) {
   const tabs = [
     { id: "interview", icon: MessageSquare, label: "Interview" },
     { id: "resume", icon: FileText, label: "Resume AI" },
@@ -58,7 +67,17 @@ function BottomNav({ activeTab }) {
   );
 }
 
-function AppHeader({ title, rightAction, icon: Icon = Briefcase }) {
+interface AppHeaderProps {
+  title: string;
+  rightAction: string;
+  icon?: React.ComponentType<{ className?: string }>;
+}
+
+function AppHeader({
+  title,
+  rightAction,
+  icon: Icon = Briefcase,
+}: AppHeaderProps) {
   return (
     <div className="px-4 pt-10 pb-3 flex items-center justify-between border-b border-white/5 bg-[#0f1117]/50">
       <div className="flex items-center gap-2 bg-[#1a1d27] border border-white/5 px-2 py-1 rounded-full">
@@ -69,8 +88,6 @@ function AppHeader({ title, rightAction, icon: Icon = Briefcase }) {
     </div>
   );
 }
-
-// ─── Individual Screen Mockups ──────────────────────────────────────────────
 
 function InterviewScreen() {
   return (
