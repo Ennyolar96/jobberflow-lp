@@ -4,13 +4,13 @@ import { Shield, Lock, Eye, Trash2, Fingerprint } from "lucide-react";
 const privacyPoints = [
   {
     icon: Lock,
-    title: "Encrypted API Keys",
-    desc: "Your API keys are encrypted with your password. No one — including us — can access them.",
+    title: "Secure API Storage",
+    desc: "API keys are stored on our server using SQLite for easy access, while remaining fully encrypted.",
   },
   {
     icon: Shield,
-    title: "Device-Only Storage",
-    desc: "Your data is stored securely on your device. Nothing is sent to external servers.",
+    title: "Hybrid Data Storage",
+    desc: "Personal data is stored on your device, while only API keys are kept on our server.",
   },
   {
     icon: Trash2,
@@ -20,7 +20,7 @@ const privacyPoints = [
   {
     icon: Eye,
     title: "Private API Usage",
-    desc: "Your API key is used only by you — it never shared with anyone.",
+    desc: "Your API key is used only by you and never shared with anyone.",
   },
   {
     icon: Fingerprint,
@@ -47,8 +47,8 @@ export default function PrivacySection() {
             Your data stays yours
           </h2>
           <p className="text-muted-foreground text-lg mt-4 max-w-xl mx-auto">
-            We take your privacy seriously. Everything is encrypted,
-            device-local, and under your control.
+            We take your privacy seriously. Your data is split between secure
+            server storage for API keys and local storage for everything else.
           </p>
         </motion.div>
 

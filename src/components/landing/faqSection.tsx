@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Is my data safe?",
-    a: "Absolutely. All data is stored locally on your device. API keys are encrypted with your password, and interview history is auto-deleted when you exit.",
+    a: "Absolutely. API keys are stored securely on our server using SQLite for easy access, while all other information and personal data are stored locally on your device for maximum privacy.",
   },
   {
     q: "Which AI models does Jobberflow support?",

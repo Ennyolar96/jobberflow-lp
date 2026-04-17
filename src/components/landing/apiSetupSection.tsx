@@ -118,8 +118,8 @@ export default function ApiSetupSection() {
                   "AES-256-CBC"
                 </div>
                 <div className="text-muted-foreground">
-                  <span className="text-primary/80">storage</span>: "device" |
-                  "Server"
+                  <span className="text-primary/80">storage</span>: {"{"}
+                  "api_keys": "server (sqlite)", "others": "local_device"{"}"}
                 </div>
               </div>
             </div>
