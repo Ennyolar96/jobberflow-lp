@@ -35,7 +35,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center">
-            <img src={logo} alt="jobberflow-logo" className="h-8 w-8" />
+            <img
+              src={logo}
+              alt="jobberflow-logo"
+              className="h-8 w-8"
+              width={50}
+              height={50}
+              loading="lazy"
+            />
           </div>
           <span className="font-inter font-bold text-lg tracking-tight">
             JobberFlow

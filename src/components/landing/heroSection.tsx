@@ -162,6 +162,9 @@ export default function HeroSection() {
                 src="/hero-mockup.png"
                 alt="Authentic Jobberflow App Interface showing AI Assistant"
                 className="w-full h-auto rounded-[2rem] transform hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                width={500}
+                height={500}
               />
             </div>
 

@@ -9,7 +9,14 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2.5">
             <div className="h-7 w-7 rounded-md bg-white flex items-center justify-center">
-              <img src={logo} alt="jobberflow-logo" className="h-7 w-7" />
+              <img
+                src={logo}
+                alt="jobberflow-logo"
+                className="h-7 w-7"
+                width={50}
+                height={50}
+                loading="lazy"
+              />
             </div>
             <span className="font-inter font-bold text-sm">JobberFlow</span>
           </div>
