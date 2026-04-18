@@ -24,8 +24,9 @@ export default function Footer() {
               <FaGithub className="h-4.5 w-4.5" />
             </a>
             <span className="text-sm text-muted-foreground">
-              Open source — made with{" "}
-              <Heart className="h-3 w-3 inline text-red-400" /> by the community
+              Open source - Made with{" "}
+              <Heart className="h-3 w-3 inline text-red-400" /> by Olaniyan
+              Mutiu A.
             </span>
           </div>
 
