@@ -5,11 +5,38 @@ import {
   MessageSquare,
   FileText,
   Search,
+  ChevronDown,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa6";
+import { useEffect, useRef, useState } from "react";
+
+const GITHUB_LINKS = [
+  {
+    label: "Frontend Repo",
+    href: "https://github.com/ennyolar96/jobberflow-frontend",
+    description: "React Native mobile app",
+  },
+  {
+    label: "Backend Repo",
+    href: "https://github.com/ennyolar96/jobberflow-backend",
+    description: "NodeJS API server",
+  },
+];
 
 export default function HeroSection() {
+  const [githubOpen, setGithubOpen] = useState(false);
+  const githubRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (githubRef.current && !githubRef.current.contains(e.target as Node)) {
+        setGithubOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background gradient orbs */}
@@ -82,21 +109,48 @@ export default function HeroSection() {
                   Download App
                 </a>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto rounded-full px-8 h-12 text-base font-inter font-semibold gap-2"
-                asChild
-              >
-                <a
-                  href="https://github.com/ennyolar96/jobberflow-backend"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {/* GitHub Dropdown */}
+              <div className="relative w-full sm:w-auto" ref={githubRef}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto rounded-full px-8 h-12 text-base font-inter font-semibold gap-2"
+                  onClick={() => setGithubOpen((prev) => !prev)}
                 >
                   <FaGithub className="h-4 w-4" />
                   View GitHub
-                </a>
-              </Button>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      githubOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </Button>
+
+                {githubOpen && (
+                  <div className="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 w-56 rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-xl shadow-black/10 overflow-hidden z-50 animate-slide-up">
+                    {GITHUB_LINKS.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setGithubOpen(false)}
+                        className="flex items-start gap-3 px-4 py-3 hover:bg-muted/60 transition-colors group"
+                      >
+                        <FaGithub className="h-4 w-4 mt-0.5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+                        <div>
+                          <p className="text-sm font-semibold font-inter leading-none">
+                            {link.label}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {link.description}
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </motion.div>
 
             {/* Floating feature badges */}

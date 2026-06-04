@@ -1,7 +1,8 @@
 import { logo } from "@/assets";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { FaGithub } from "react-icons/fa6";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -11,14 +12,39 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
+const GITHUB_LINKS = [
+  {
+    label: "Frontend Repo",
+    href: "https://github.com/ennyolar96/jobberflow-frontend",
+    description: "React Native mobile app",
+  },
+  {
+    label: "Backend Repo",
+    href: "https://github.com/ennyolar96/jobberflow-backend",
+    description: "NodeJS API server",
+  },
+];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [githubOpen, setGithubOpen] = useState(false);
+  const githubRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (githubRef.current && !githubRef.current.contains(e.target as Node)) {
+        setGithubOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const scrollTo = (href: string) => {
@@ -62,15 +88,48 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="font-inter" asChild>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
+          {/* GitHub Dropdown */}
+          <div className="relative" ref={githubRef}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="font-inter gap-1.5"
+              onClick={() => setGithubOpen((prev) => !prev)}
             >
+              <FaGithub className="h-4 w-4" />
               GitHub
-            </a>
-          </Button>
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  githubOpen ? "rotate-180" : ""
+                }`}
+              />
+            </Button>
+
+            {githubOpen && (
+              <div className="absolute right-0 top-full mt-2 w-52 rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-xl shadow-black/10 overflow-hidden z-50 animate-slide-up">
+                {GITHUB_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setGithubOpen(false)}
+                    className="flex items-start gap-3 px-4 py-3 hover:bg-muted/60 transition-colors group"
+                  >
+                    <FaGithub className="h-4 w-4 mt-0.5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+                    <div>
+                      <p className="text-sm font-semibold font-inter leading-none">
+                        {link.label}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {link.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
           <Button size="sm" className="font-inter rounded-full px-5" asChild>
             <a href="/jobberflow.apk" download="Jobberflow.apk">
               Download App
