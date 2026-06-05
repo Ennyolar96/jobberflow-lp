@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Privacy", href: "#privacy" },
+  { label: "Policy", href: "/policy" },
   { label: "Open Source", href: "#open-source" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -30,6 +32,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [githubOpen, setGithubOpen] = useState(false);
   const githubRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -47,9 +51,31 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      window.setTimeout(() => {
+        document
+          .querySelector(location.hash)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.hash, location.pathname]);
+
   const scrollTo = (href: string) => {
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate(`/${href}`);
+        return;
+      }
+
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    navigate(href);
   };
 
   return (
@@ -59,7 +85,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2.5">
           <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center">
             <img
               src={logo}
@@ -73,14 +99,18 @@ export default function Navbar() {
           <span className="font-inter font-bold text-lg tracking-tight">
             JobberFlow
           </span>
-        </div>
+        </Link>
 
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted/50"
+              className={`px-3 py-1.5 text-sm font-medium transition-colors rounded-md hover:bg-muted/50 ${
+                location.pathname === link.href
+                  ? "text-foreground bg-muted/40"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {link.label}
             </button>
@@ -88,7 +118,6 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          {/* GitHub Dropdown */}
           <div className="relative" ref={githubRef}>
             <Button
               variant="ghost"
@@ -140,6 +169,7 @@ export default function Navbar() {
         <button
           className="md:hidden p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
           {mobileOpen ? (
             <X className="h-5 w-5" />

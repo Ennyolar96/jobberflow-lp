@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { Shield, Lock, Eye, Trash2, Fingerprint } from "lucide-react";
+import { Shield, Lock, Eye, Trash2, Fingerprint, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const privacyPoints = [
   {
@@ -75,6 +77,15 @@ export default function PrivacySection() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Button variant="outline" className="rounded-full" asChild>
+            <Link to="/policy">
+              <FileText className="h-4 w-4" />
+              Read full privacy policy
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

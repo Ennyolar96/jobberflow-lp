@@ -1,6 +1,7 @@
 import { logo } from "@/assets";
 import { Heart } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -21,7 +22,13 @@ export default function Footer() {
             <span className="font-inter font-bold text-sm">JobberFlow</span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-5 md:gap-6">
+            <Link
+              to="/policy"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </Link>
             <a
               href="https://github.com/ennyolar96/jobberflow-frontend"
               target="_blank"
