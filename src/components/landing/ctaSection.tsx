@@ -33,7 +33,10 @@ export default function CTASection() {
               className="rounded-full px-10 h-14 text-base font-inter font-semibold gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300"
               asChild
             >
-              <a href="/jobberflow.apk" download="Jobberflow.apk">
+              <a
+                href="https://apkpure.com/p/com.jobberflow.preview"
+                target="_blank"
+              >
                 <Download className="h-5 w-5" />
                 Download Now
               </a>

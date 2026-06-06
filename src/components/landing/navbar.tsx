@@ -160,7 +160,10 @@ export default function Navbar() {
             )}
           </div>
           <Button size="sm" className="font-inter rounded-full px-5" asChild>
-            <a href="/jobberflow.apk" download="Jobberflow.apk">
+            <a
+              href="https://apkpure.com/p/com.jobberflow.preview"
+              target="_blank"
+            >
               Download App
             </a>
           </Button>
@@ -192,7 +195,10 @@ export default function Navbar() {
           ))}
           <div className="pt-3 space-y-2">
             <Button className="w-full rounded-full font-inter" asChild>
-              <a href="/jobberflow.apk" download="Jobberflow.apk">
+              <a
+                href="https://apkpure.com/p/com.jobberflow.preview"
+                target="_blank"
+              >
                 Download App
               </a>
             </Button>

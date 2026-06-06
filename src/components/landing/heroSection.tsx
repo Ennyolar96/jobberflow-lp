@@ -104,7 +104,10 @@ export default function HeroSection() {
                 className="w-full sm:w-auto rounded-full px-8 h-12 text-base font-inter font-semibold gap-2 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
                 asChild
               >
-                <a href="/jobberflow.apk" download="Jobberflow.apk">
+                <a
+                  href="https://apkpure.com/p/com.jobberflow.preview"
+                  target="_blank"
+                >
                   <Download className="h-4 w-4" />
                   Download App
                 </a>
